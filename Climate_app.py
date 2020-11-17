@@ -41,9 +41,9 @@ def home():
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/<start><br/>" 
-        f"/api/v1.0/<start>/<end>"
-        f"/api/v1.0/YYYY-MM-DD <em>--Enter the start date you want</em><br/>")
+        f"/api/v1.0/<start>/add start date in YYY-MM-DD format<br/>" 
+        f"/api/v1.0/<start>/<end> add start date and end date in YYY-MM-DD format")
+        
 
 
 
@@ -63,7 +63,7 @@ def precipitation():
 @app.route("/api/v1.0/stations")
 def stations():
     session=Session(engine)
-    results=session.query(measurement.station).all()
+    results=session.query(Station.name).all()
     session.close()
     all_stations=list(np.ravel(results))
     return jsonify(all_stations)
@@ -83,20 +83,20 @@ def tobs():
 @app.route("/api/v1.0/<start>")
 def start(start):
     session = Session(engine)
-    query_date = dt.datetime.strptime(start,"('%Y-%m-%d',)")
-    results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date<query_date).all()
+    #query_date = dt.datetime.strptime(start,"('%Y-%m-%d',)")
+    results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date>start).all()
     session.close()
     all_start=list(np.ravel(results))
     return jsonify(all_start)
   
 
 @app.route("/api/v1.0/<start>/<end>")
-def start_end():
+def start_end(start_end):
     session = Session(engine)
-    lst_date=str(session.query(measurement.date).order_by(measurement.date.desc()).first())
-    date_dt=dt.datetime.strptime(lst_date,"('%Y-%m-%d',)")
-    query_date=date_dt-dt.timedelta(days=366)
-    results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date>query_date).all()
+    #lst_date=str(session.query(measurement.date).order_by(measurement.date.desc()).first())
+    #date_dt=dt.datetime.strptime(lst_date,"('%Y-%m-%d',)")
+    #query_date=date_dt-dt.timedelta(days=366)
+    results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date<end ).filter(measurement.date>start).all()
     session.close()
     all_start=list(np.ravel(results))
     return jsonify(all_start)
