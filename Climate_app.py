@@ -91,12 +91,12 @@ def start(start):
   
 
 @app.route("/api/v1.0/<start>/<end>")
-def start_end(start_end):
+def start_end(start,end):
     session = Session(engine)
     #lst_date=str(session.query(measurement.date).order_by(measurement.date.desc()).first())
     #date_dt=dt.datetime.strptime(lst_date,"('%Y-%m-%d',)")
     #query_date=date_dt-dt.timedelta(days=366)
-    results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date<end ).filter(measurement.date>start).all()
+    results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date>=start).filter(measurement.date<=end).all()
     session.close()
     all_start=list(np.ravel(results))
     return jsonify(all_start)
