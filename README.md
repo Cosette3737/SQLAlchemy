@@ -1,5 +1,5 @@
 # SQLALCHEMY #
-
+>Get ready to go on an awesome trip to Hawaii! With the help of this custom API, you can pick the perfect time of year to have your dream vacation!
 ## Climate Analysis ##
 The First component of the Sqlalchemy project uses Python and Sqlalchemy queries to explore and analyze the climate database of Hawaii.
 
@@ -9,9 +9,9 @@ Throughout the precipitation analysis, measurements of precipitation are gathere
 ### FLASK API ###
 For the next section of the project a Flask API is used to query the information from the previous database.  
 
-## These paths include
-* [/api/v1.0/precipitation]
-* [/api/v1.0/stations]
-* [/api/v1.0/tobs]
-* [/api/v1.0/start]
-* [/api/vi.0/start/end]
+## Avalailable Routes:
+* /api/v1.0/precipitation
+* /api/v1.0/stations
+* /api/v1.0/tobs
+* /api/v1.0/start
+* /api/vi.0/start/end
