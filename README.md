@@ -1,6 +1,6 @@
 # SQLALCHEMY #
 ## Climate Analysis ##
-The First component of the SQLALCHEMY project uses Python and SQLALCHEMY queries to explore and analyze the climate database of Hawaii.
+The First component of the Sqlalchemy project uses Python and Sqlalchemy queries to explore and analyze the climate database of Hawaii.
 ## Precipitation Analysis ##
  Throughout the precipitation analysis, measurements of precipitation are gathered over a 12-month span and plotted to look at the measurements over that timeframe.  The database is also used to analyze the different weather statements in Hawaii and sort them by the amount of observations they completed and visualize the number of observations in a histogram. 
 ### FLASK API ###
